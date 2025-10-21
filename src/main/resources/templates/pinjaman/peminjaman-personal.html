@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Form Pinjaman Personal</title>
+  <link href="css/theme.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+</head>
+
+<style>
+  .card.service-card {
+    width: 75%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    background-color: #fff;
+  }
+
+  .card label {
+    display: block;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #555;
+  }
+
+  .card input[type="text"],
+  .card input[type="date"],
+  .card input[type="number"] {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+
+  .card input:focus {
+    border-color: #209246;
+  }
+
+  .card button {
+    background-color: #209246;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.75rem;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 1rem;
+    transition: background-color 0.3s;
+  }
+
+  .card button:hover {
+    background-color: #166f31;
+  }
+
+  .card .error-message {
+    font-size: 0.8rem;
+    color: red;
+    display: none;
+  }
+
+  select {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    background-color: #fff;
+    color: #495057;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+
+  select:focus {
+    border-color: #209246;
+    outline: none;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .navbar {
+    background-color: #fff;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  }
+
+  .navbar-hidden {
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .navbar-visible {
+    transform: translateY(0);
+    transition: transform 0.3s ease-in-out;
+  }
+</style>
+
+<body>
+  <main class="main" id="top">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-5 d-block navbar-visible"
+      data-navbar-on-scroll="data-navbar-on-scroll">
+      <div class="container">
+        <a class="navbar-brand" href="/home">
+          <img src="images/logo.png" height="34" alt="logo" />
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
+            <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page" href="/home">Home</a>
+            </li>
+            <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
+                href="/personal/profile">Profile</a>
+            </li>
+            <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
+                href="/history">History</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <section id="section-1" style="padding-top: 7rem;">
+      <div class="bg-holder" style="background-image:url(images/hero/hero-bg.png);"></div>
+      <section class="pt-5 pt-md-9" id="service">
+        <div class="container">
+          <div class="mb-7 text-center">
+            <h5 class="text-secondary">AKUN PERSONAL</h5>
+            <h3 class="fs-xl-10 fs-lg-8 fs-7 fw-bold font-cursive text-capitalize">Formulir Peminjaman Personal</h3>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 col-sm-12 mb-12">
+              <div class="card service-card">
+                <div id="">
+
+                  <form th:action="@{/addpinjaman}" th:object="${pinjaman}" method="post" id="loanForm">
+                    <input type="hidden" th:field="*{account_id}" />
+
+                    <label for="">Tujuan Pinjaman</label>
+                    <input type="text" th:field="*{tujuanPeminjaman}"
+                           id="" placeholder="Masukkan tujuan pinjaman Anda">
+                    <p id="errorLoanReason" class="error-message">Tujuan pinjaman wajib diisi!</p>
+
+                    <label for="">Jumlah Pinjaman</label>
+                    <input type="text" th:field="*{jumlahPinjaman}"
+                           id="" placeholder="Masukkan jumlah pinjaman Anda" />
+                    <p id="errorLoanAmount" class="error-message">Jumlah pinjaman wajib diisi!</p>
+
+                    <label for="">Tanggal Pinjaman</label>
+                    <input type="date" th:field="*{tanggalPinjaman}"
+                           id="">
+                    <p id="errorLoanDate" class="error-message">Tanggal pinjaman wajib diisi!</p>
+
+                    <label for="loanDuration">Durasi Peminjaman (Bulan)</label>
+                    <select id="loanDuration">
+                      <option value="" disabled selected>Pilih durasi peminjaman</option>
+                      <option value="3 Bulan">3 Bulan</option>
+                      <option value="6 Bulan">6 Bulan</option>
+                      <option value="12 Bulan">12 Bulan</option>
+                    </select>
+                    <p id="errorloanDuration" class="error-message">Durasi peminjaman wajib diisi!</p>
+
+                    <button type="submit" class="btn btn-warning" id="submitLoanForm">Ajukan Pinjaman</button>
+                  </form>
+
+                </div>
+              </div>
+            </div>
+          </div>
+      </section>
+    </section>
+
+    <section id="loanInfoSection" class="hidden">
+      <div class="bg-holder" style="background-image:url(images/hero/hero-bg.png);"></div>
+      <section class="pt-5 pt-md-9" id="service">
+        <div class="container">
+          <div class="mb-7 text-center">
+            <h5 class="text-secondary">INFORMASI PEMINJAMAN</h5>
+            <h3 class="fs-xl-10 fs-lg-8 fs-7 fw-bold font-cursive text-capitalize">Detail Pinjaman Anda</h3>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 col-sm-12 mb-12">
+              <div class="card service-card">
+                <h5>Informasi Pinjaman</h5>
+                <p><strong>Tujuan Pinjaman:</strong> <span id="loanReasonInfo"></span></p>
+                <p><strong>Jumlah Pinjaman:</strong> <span id="loanAmountInfo"></span></p>
+                <p><strong>Tanggal Pinjaman:</strong> <span id="loanDateInfo"></span></p>
+                <p><strong>Durasi Peminjaman:</strong> <span id="loanDurationInfo"></span></p>
+                <p><strong>Tanggal Jatuh Tempo:</strong> <span id="loanDueDateInfo"></span></p>
+                <p><strong>Bunga:</strong> <span id="loanInterestInfo"></span></p>
+                <p><strong>Total yang Harus Dibayar:</strong> <span id="loanTotalInfo"></span></p>
+                <button onclick="window.location.reload();" class="btn btn-warning">Ajukan Lagi</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    let lastScrollTop = 0;
+    const navbar = document.querySelector('.navbar');
+
+    window.addEventListener('scroll', function () {
+      let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+      if (currentScroll > lastScrollTop) {
+        navbar.classList.remove('navbar-visible');
+        navbar.classList.add('navbar-hidden');
+      } else {
+        navbar.classList.remove('navbar-hidden');
+        navbar.classList.add('navbar-visible');
+      }
+      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+    });
+
+    document.getElementById('loanAmount').addEventListener('input', function (e) {
+      let value = e.target.value.replace(/[^0-9]/g, '');
+      if (value) {
+        e.target.value = 'Rp ' + value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+      }
+    });
+
+    document.getElementById('loanForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const loanReason = document.getElementById('loanReason');
+      const loanAmount = document.getElementById('loanAmount');
+      const loanDate = document.getElementById('loanDate');
+      const loanDuration = document.getElementById('loanDuration');
+
+      const isLoanReasonValid = validateField(loanReason, document.getElementById('errorLoanReason'));
+      const isLoanAmountValid = validateField(loanAmount, document.getElementById('errorLoanAmount'));
+      const isLoanDateValid = validateField(loanDate, document.getElementById('errorLoanDate'));
+      const isLoanDurationValid = validateLoanDuration(loanDuration, document.getElementById('errorloanDuration'));
+
+      if (!isLoanAmountValid || !isLoanDateValid || !isLoanDurationValid) {
+        alert("Harap isi semua data yang diperlukan dengan benar.");
+      } else {
+        const loanAmountNumeric = parseInt(loanAmount.value.replace(/[^0-9]/g, ''), 10);
+        const loanDateValue = new Date(loanDate.value);
+        const dueDate = new Date(loanDateValue.setMonth(loanDateValue.getMonth() + parseInt(loanDuration.value)));
+
+        const formattedAmount = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(loanAmountNumeric);
+
+        const interestRate = 0.05;
+        const totalAmount = loanAmountNumeric * (1 + (interestRate * parseInt(loanDuration.value)));
+        const formattedTotal = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(totalAmount);
+
+        document.getElementById('loanReasonInfo').textContent = loanReason.value;
+        document.getElementById('loanAmountInfo').textContent = formattedAmount;
+        document.getElementById('loanDateInfo').textContent = loanDate.value;
+        document.getElementById('loanDurationInfo').textContent = loanDuration.value;
+        document.getElementById('loanDueDateInfo').textContent = dueDate.toLocaleDateString('id-ID');
+        document.getElementById('loanInterestInfo').textContent = '5% per bulan';
+        document.getElementById('loanTotalInfo').textContent = formattedTotal;
+
+        document.getElementById('loanInfoSection').classList.remove('hidden');
+        document.getElementById('section-1').classList.add('hidden');
+      }
+    });
+
+    function validateField(field, errorElement) {
+      if (field.value.trim() === '') {
+        errorElement.style.display = 'block';
+        return false;
+      } else {
+        errorElement.style.display = 'none';
+        return true;
+      }
+    }
+
+    function validateLoanDuration(durationElement, errorElement) {
+      if (durationElement.value === '') {
+        errorElement.style.display = 'block';
+        return false;
+      } else {
+        errorElement.style.display = 'none';
+        return true;
+      }
+    }
+  </script>
+</body>
+
+</html>

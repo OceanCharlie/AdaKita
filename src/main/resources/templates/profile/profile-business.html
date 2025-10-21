@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Profil Akun Bisnis</title>
+  <link href="css/theme.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+</head>
+
+<style>
+  .card.service-card {
+    width: 75%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    background-color: #fff;
+  }
+
+  .btn-signout {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 0.75rem;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 1rem;
+    transition: background-color 0.3s;
+  }
+
+  .btn-signout:hover {
+    background-color: #a71d2a;
+  }
+
+  .btn-editProfile {
+    background-color: #209246;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 0.75rem;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 1rem;
+    transition: background-color 0.3s;
+  }
+
+  .btn-editProfile:hover {
+    background-color: #0c5926;
+  }
+
+
+  .card label {
+    display: block;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #555;
+  }
+
+  .card input:focus {
+    border-color: #209246;
+  }
+
+  .navbar {
+    background-color: #fff;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  }
+
+  .navbar-hidden {
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .navbar-visible {
+    transform: translateY(0);
+    transition: transform 0.3s ease-in-out;
+  }
+</style>
+
+<body>
+  <main class="main" id="top">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-5 d-block navbar-visible"
+      data-navbar-on-scroll="data-navbar-on-scroll">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <img src="images/logo.png" height="34" alt="logo" />
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
+            <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page" href="#home">Profile</a>
+            </li>
+            <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
+                href="#destination">History</a>
+            </li>
+            <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
+                href="#booking">Pinjaman</a>
+            </li>
+            <li class="nav-item px-3 px-xl-4"><a class="btn btn-warning order-1 order-lg-0 fw-medium"
+                href="#!">Admin</a></li>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <section id="section-1" style="padding-top: 7rem;">
+      <div class="bg-holder" style="background-image:url(images/hero/hero-bg.png);"></div>
+      <section class="pt-5 pt-md-9" id="service">
+        <div class="container">
+          <div class="mb-7 text-center">
+            <h5 class="text-secondary">AKUN BISNIS</h5>
+            <h3 class="fs-xl-10 fs-lg-8 fs-7 fw-bold font-cursive text-capitalize">Profil Akun Bisnis</h3>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 col-sm-12 mb-12">
+              <div class="card service-card">
+                <section id="profile" style="padding-top: 7rem;">
+                  <div class="container">
+                    <div class="profile-container" th:each="profileData : ${account_profile}">
+                      <div class="profile-header">
+                        <h3><td th:text="${profileData.namaPerusahaan}"/></h3>
+                        <p class="text-secondary"><td th:text="${profileData.gmail}"/></p>
+                      </div>
+                      <div class="profile-details">
+                        <p><strong>Username: <td th:text="${profileData.username}"/></strong></p>
+                        <p><strong>Nama Lengkap: <td th:text="${profileData.name}"/></strong></p>
+                        <p><strong>Nik: <td th:text="${profileData.nik}"/></strong></p>
+                        <p><strong>Jenis Usaha:<td th:text="${profileData.jenisUsaha}"/></strong></p>
+                        <p><strong>Nomor Telepon: <td th:text="${profileData.telp_number}"/></strong></p>
+                        <p><strong>Alamat: <td th:text="${profileData.alamat}"/></strong></p>
+                      </div>
+                      <div class="form-options">
+                        <button onclick="location.href='edit-business.html'" type="button" class="btn-editProfile">Edit Profile</button>
+                        <button onclick="location.href='#'" type="button" class="btn-signout">Sign out</button>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+      </section>
+      </div>
+      </div>
+    </section>
+    </section>
+    </section>
+  </main>
+
+  <script>
+    let lastScrollTop = 0;
+    const navbar = document.querySelector('.navbar');
+
+    window.addEventListener('scroll', function () {
+      let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+      if (currentScroll > lastScrollTop) {
+        navbar.classList.remove('navbar-visible');
+        navbar.classList.add('navbar-hidden');
+      } else {
+        navbar.classList.remove('navbar-hidden');
+        navbar.classList.add('navbar-visible');
+      }
+      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+    });
+  </script>
+</body>
+
+</html>

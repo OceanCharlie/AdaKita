@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>History Peminjaman Business</title>
+  <link href="css/theme.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+</head>
+
+<style>
+  .card.history-card {
+    width: 80%;
+    margin: 0 auto;
+    padding: 2rem;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    background-color: #fff;
+  }
+
+  table {
+    width: 100%;
+    margin-top: 1rem;
+    border-collapse: collapse;
+  }
+
+  table,
+  th,
+  td {
+    border: 1px solid #ddd;
+    text-align: left;
+    padding: 1rem;
+  }
+
+  th {
+    background-color: #f4f4f4;
+  }
+
+  .btn {
+    background-color: #209246;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .btn:hover {
+    background-color: #166f31;
+  }
+
+  .history-container {
+    padding: 2rem;
+  }
+
+  .navbar {
+    background-color: #fff;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  }
+
+  .navbar-hidden {
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .navbar-visible {
+    transform: translateY(0);
+    transition: transform 0.3s ease-in-out;
+  }
+</style>
+
+<body>
+  <main class="main" id="top">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-5 d-block navbar-visible"
+      data-navbar-on-scroll="data-navbar-on-scroll">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <img src="images/logo.png" height="34" alt="logo" />
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
+            <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page" href="#home">Profile</a>
+            </li>
+            <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
+                href="#destination">History</a>
+            </li>
+            <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
+                href="#booking">Pinjaman</a>
+            </li>
+            <li class="nav-item px-3 px-xl-4"><a class="btn btn-warning order-1 order-lg-0 fw-medium"
+                href="#!">Admin</a></li>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <section id="history-section" style="padding-top: 7rem;">
+      <div class="bg-holder" style="background-image:url(images/hero/hero-bg.png);"></div>
+      <section class="pt-5 pt-md-9">
+        <div class="container">
+          <div class="mb-7 text-center">
+            <h5 class="text-secondary">RIWAYAT PINJAMAN</h5>
+            <h3 class="fs-xl-10 fs-lg-8 fs-7 fw-bold font-cursive text-capitalize">History Pinjaman Business</h3>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 col-sm-12 mb-12">
+              <div class="card history-card">
+                <h5>Riwayat Pinjaman Bisnis</h5>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>No.</th>
+                      <th>Nama Bisnis</th>
+                      <th>Jumlah Pinjaman</th>
+                      <th>Tujuan Pinjaman</th>
+                      <th>Tanggal Pinjaman</th>
+                      <th>Durasi (Bulan)</th>
+                      <th>Bunga</th>
+                    </tr>
+                  </thead>
+                  <tbody id="historyTableBody">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    let lastScrollTop = 0;
+    const navbar = document.querySelector('.navbar');
+
+    window.addEventListener('scroll', function () {
+      let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+      if (currentScroll > lastScrollTop) {
+        navbar.classList.remove('navbar-visible');
+        navbar.classList.add('navbar-hidden');
+      } else {
+        navbar.classList.remove('navbar-hidden');
+        navbar.classList.add('navbar-visible');
+      }
+      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+    });
+
+    function displayLoanHistory() {
+      const historyTableBody = document.getElementById('historyTableBody');
+      historyTableBody.innerHTML = "";
+
+      loanHistory.forEach((loan, index) => {
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${loan.businessName}</td>
+          <td>${loan.loanAmount}</td>
+          <td>${loan.loanReason}</td>
+          <td>${loan.loanDate}</td>
+          <td>${loan.loanDuration}</td>
+          <td>${loan.bunga}</td>
+        `;
+        historyTableBody.appendChild(row);
+      });
+    }
+
+    window.onload = displayLoanHistory;
+  </script>
+
+</body>
+
+</html>

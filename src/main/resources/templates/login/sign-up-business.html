@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Akun</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+</head>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .login-container {
+        display: flex;
+        width: 80%;
+        max-width: 1200px;
+        background: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-container {
+        flex: 1;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    .form-content {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .logo img {
+        height: 40px;
+        margin-bottom: 1.5rem;
+    }
+
+    h2 {
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    p {
+        margin-bottom: 1.5rem;
+        font-size: 0.9rem;
+        color: #6c757d;
+    }
+
+    form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    label {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        margin-top: 0.5rem;
+    }
+
+    input {
+        width: 100%;
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        font-size: 0.9rem;
+    }
+
+    h2 {
+        font-size: x-large;
+    }
+
+    select {
+        width: 425px;
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        background-color: #fff;
+        color: #495057;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+    }
+
+    select:focus {
+        border-color: #209246;
+        outline: none;
+    }
+
+    select option {
+        padding: 0.75rem;
+        background-color: #fff;
+    }
+
+    select:invalid {
+    border-color: red;
+}   
+
+    .form-options {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    .btn-signin {
+        background: #209246;
+        color: #fff;
+        padding: 0.75rem;
+        border: none;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        cursor: pointer;
+        width: 425px;
+    }
+
+    .btn-signin:hover {
+        background: #0c5926;
+    }
+
+    .image-container {
+        flex: 1;
+        background: #f8f9fa;
+    }
+
+    .image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .error-message {
+        color: red;
+        font-size: 0.8rem;
+        display: none;
+        margin-top: -0.8rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .form-options {
+        margin-left: 85px;
+    }
+
+    .acc-already {
+        margin-left: 85px;
+    }
+
+    .form-options {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .btn-signin {
+        width: 425px;
+        max-width: 100%;
+    }
+
+    #nextBtn {
+        background: #209246;
+        color: white;
+    }
+
+    #nextBtn:hover {
+        background: #0c5926;
+    }
+
+    #prevBtn {
+        background: white;
+        color: #209246;
+        border: 1px solid #209246;
+    }
+
+    #prevBtn:hover {
+        background: #f1f1f1;
+    }
+
+    #submitBtn {
+        background: #209246;
+        color: white;
+        border: none;
+    }
+
+    #submitBtn:hover {
+        background: #0c5926;
+    }
+</style>
+
+<body>
+    <div class="login-container">
+        <div class="form-container">
+            <div class="form-content">
+                <div class="logo">
+                    <img src="images/logo.png" alt="Logo">
+                </div>
+                <h2>Buat Akun Perusahaan Baru</h2>
+                <form id="registerForm">
+                    <div id="section-1">
+                        <label for="nama">Nama Lengkap</label>
+                        <input type="text" id="nama" placeholder="Masukkan nama lengkap Anda">
+                        <p id="errorNama" class="error-message">Nama lengkap wajib diisi!</p>
+
+                        <label for="namaPerusahaan">Nama Perusahaan</label>
+                        <input type="text" id="namaPerusahaan" placeholder="Masukkan Perusahaan Anda">
+                        <p id="errorNamaPerusahaan" class="error-message">Nama perusahaan wajib diisi!</p>
+
+                        <label for="busType">Jenis Usaha</label>
+                        <input type="text" id="busType" placeholder="Masukkan Jenis Usaha Anda">
+                        <p id="errorBusType" class="error-message">Jenis usaha wajib diisi!</p>
+                    </div>
+
+                    <div id="section-2" class="hidden">
+                        <label for="phoneNum">Nomor Telepon</label>
+                        <input type="tel" id="phoneNum" placeholder="Masukkan nomor telepon Anda">
+                        <p id="errorPhoneNum" class="error-message">Nomor telepon wajib diisi!</p>
+
+                        <label for="address">Alamat</label>
+                        <input type="text" id="address" placeholder="Masukkan alamat Anda">
+                        <p id="errorAddress" class="error-message">Alamat wajib diisi!</p>
+                    </div>
+
+                    <div id="section-3" class="hidden">
+                        <label for="username">Nama Pengguna</label>
+                        <input type="text" id="username" placeholder="Masukkan nama pengguna">
+                        <p id="errorUsername" class="error-message">Nama pengguna wajib diisi!</p>
+
+                        <label for="password">Kata Sandi</label>
+                        <input type="password" id="password" placeholder="Masukkan kata sandi">
+                        <p id="errorPassword" class="error-message">Kata sandi wajib diisi!</p>
+
+                        <label for="confirmPassword">Konfirmasi Kata Sandi</label>
+                        <input type="password" id="confirmPassword" placeholder="Masukkan ulang kata sandi">
+                        <p id="errorConfirmPassword" class="error-message">Konfirmasi kata sandi wajib diisi!</p>
+                    </div>
+
+                </form>
+            </div>
+            <div class="form-options">
+                <button type="submit" id="submitBtn" class="btn-signin hidden">Daftar</button>
+                <button type="button" id="nextBtn" class="btn-signin">Selanjutnya</button>
+                <button type="button" id="prevBtn" class="btn-signin hidden">Kembali</button>
+            </div>
+            <div class="acc-already">
+                <p>Sudah punya akun? <a href="sign-in.html">Masuk</a></p>
+            </div>
+        </div>
+        <div class="image-container">
+            <img src="images/pinjol.png" alt="Workspace">
+        </div>
+    </div>
+
+    <script>
+        const sections = document.querySelectorAll('[id^="section"]');
+        const nextBtn = document.getElementById('nextBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const submitBtn = document.getElementById('submitBtn');
+        let currentSection = 0;
+    
+        const fields = {
+            section1: ['nama', 'namaPerusahaan', 'busType'],
+            section2: ['phoneNum', 'address'],
+            section3: ['username', 'password', 'confirmPassword']
+        };
+    
+        function navigateSection(offset) {
+            sections[currentSection].classList.add('hidden');
+            currentSection += offset;
+            sections[currentSection].classList.remove('hidden');
+            updateButtonState();
+        }
+    
+        function updateButtonState() {
+            prevBtn.classList.toggle('hidden', currentSection === 0);
+            nextBtn.classList.toggle('hidden', currentSection === sections.length - 1);
+            submitBtn.classList.toggle('hidden', currentSection !== sections.length - 1);
+        }
+    
+        function validateCurrentSection() {
+            const currentFields = fields[`section${currentSection + 1}`];
+            let isValid = true;
+    
+            currentFields.forEach((id) => {
+                const input = document.getElementById(id);
+                const error = document.getElementById(`error${id.charAt(0).toUpperCase() + id.slice(1)}`);
+    
+                // Validasi input yang wajib diisi
+                if (!input.value.trim()) {
+                    error.style.display = 'block';
+                    isValid = false;
+                } else {
+                    error.style.display = 'none';
+                }
+    
+                // Validasi untuk nomor telepon
+                if (id === 'phoneNum') {
+                    if (input.value.length < 10 || input.value.length > 15) {
+                        error.style.display = 'block';
+                        isValid = false;
+                        error.innerText = 'Nomor telepon harus antara 10 hingga 15 karakter!';
+                    } else {
+                        error.style.display = 'none';
+                    }
+                }
+    
+                // Validasi konfirmasi password
+                if (id === 'confirmPassword') {
+                    const password = document.getElementById('password').value;
+                    if (input.value !== password) {
+                        error.innerText = 'Kata sandi dan konfirmasi kata sandi harus sama!';
+                        error.style.display = 'block';
+                        isValid = false;
+                    } else if (input.value.length < 6) {
+                        error.innerText = 'Kata sandi minimal 6 karakter!';
+                        error.style.display = 'block';
+                        isValid = false;
+                    } else {
+                        error.style.display = 'none';
+                    }
+                }
+            });
+    
+            return isValid;
+        }
+    
+        nextBtn.addEventListener('click', () => {
+            if (validateCurrentSection()) navigateSection(1);
+        });
+    
+        prevBtn.addEventListener('click', () => navigateSection(-1));
+    
+        submitBtn.addEventListener('click', (e) => {
+            if (validateCurrentSection()) {
+                window.location.href = 'sign-in.html';
+            } else {
+                e.preventDefault();
+            }
+        });
+    
+        updateButtonState();
+    </script>
+    
+    
+</body>
+
+</html>

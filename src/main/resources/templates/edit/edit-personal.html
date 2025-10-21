@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Edit Profil Akun Personal</title>
+    <link href="/css/theme.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+</head>
+
+<style>
+    p {
+        margin-bottom: 1.5rem;
+        font-size: 0.9rem;
+        color: #6c757d;
+    }
+
+    label {
+        margin-top: 15px;
+    }
+
+    select {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        background-color: #fff;
+        color: #495057;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+    }
+
+    select:focus {
+        border-color: #209246;
+        outline: none;
+    }
+
+    select option {
+        padding: 0.75rem;
+        background-color: #fff;
+    }
+
+    select:invalid {
+        border-color: red;
+    }
+
+    .card.edit-card {
+        width: 75%;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+        border-radius: 10px;
+        background-color: #fff;
+    }
+
+    .btn-save {
+        background-color: #209246;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 0.75rem;
+        font-size: 1rem;
+        cursor: pointer;
+        width: 100%;
+        margin-top: 1rem;
+        transition: background-color 0.3s;
+    }
+
+    .btn-save:hover {
+        background-color: #0c5926;
+    }
+
+    .form-options {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .form-group label {
+        display: block;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    .form-group input:focus {
+        border-color: #209246;
+        outline: none;
+    }
+
+    .error-message {
+        color: red;
+        font-size: 0.8rem;
+        display: none;
+        margin-top: 0.8rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .navbar {
+        background-color: #fff;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .navbar-hidden {
+        transform: translateY(-100%);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .navbar-visible {
+        transform: translateY(0);
+        transition: transform 0.3s ease-in-out;
+    }
+</style>
+
+<body>
+    <main class="main" id="top">
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top py-5 d-block navbar-visible"
+            data-navbar-on-scroll="data-navbar-on-scroll">
+            <div class="container">
+                <a class="navbar-brand" href="/home">
+                    <img src="/images/logo.png" height="34" alt="logo" />
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
+                        <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
+                                href="/home">Home</a>
+                        </li>
+                        <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
+                                href="/history">History</a>
+                        </li>
+                        <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page"
+                                href="/addpinjaman">Pinjaman</a>
+                        </li>
+                        <li class="nav-item px-3 px-xl-4"><a class="btn btn-warning order-1 order-lg-0 fw-medium"
+                                href="#!">Admin</a></li>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <section id="section-1" style="padding-top: 7rem;">
+            <div class="bg-holder" style="background-image:url(images/hero/hero-bg.png);"></div>
+            <section class="pt-5 pt-md-9" id="editProfile">
+                <div class="container">
+                    <div class="mb-7 text-center">
+                        <h5 class="text-secondary">EDIT AKUN PERSONAL</h5>
+                        <h3 class="fs-xl-10 fs-lg-8 fs-7 fw-bold font-cursive text-capitalize">Edit Profil Akun</h3>
+                    </div>
+                    <div class="card edit-card">
+                        <form action="#" th:action="@{/personal/profile/save}" th:object="${account}" method="POST">
+                            <div class="form-group">
+
+                                <input type="hidden" th:field="*{account_id}" />
+
+                                <label for="username">Nama Pengguna</label>
+                                <input type="text" th:field="*{username}"
+                                       id="username" placeholder="Masukkan nama pengguna">
+                                <p id="errorUsername" class="error-message">Nama pengguna wajib diisi!</p>
+
+                                <label for="nama">Nama Lengkap</label>
+                                <input type="text" th:field="*{name}"
+                                       id="nama" name="nama" placeholder="Masukkan Nama Lengkap">
+                                <p id="errorNama" class="error-message">Nama lengkap wajib diisi!</p>
+
+                                <label for="nik">NIK</label>
+                                <input type="text" th:field="*{nik}"
+                                       id="nik" name="nik" placeholder="Masukkan NIK">
+                                <p id="errorNik" class="error-message">NIK harus berisi 16 angka.</p>
+
+                                <label for="phoneNum">Nomor Telepon</label>
+                                <input type="tel" th:field="*{telp_number}"
+                                       id="phoneNum" placeholder="Masukkan nomor telepon Anda">
+                                <p id="errorPhoneNum" class="error-message">Nomor telepon wajib diisi!</p>
+
+                                <label for="education">Riwayat Pendidikan Terakhir</label>
+                                <select id="education" th:field="*{pendidikan}">
+                                    <option value="" disabled selected>Pilih jenjang pendidikan</option>
+                                    <option value="SD">SD (Sekolah Dasar)</option>
+                                    <option value="SMP">SMP (Sekolah Menengah Pertama)</option>
+                                    <option value="SMA">SMA (Sekolah Menengah Atas)</option>
+                                    <option value="D1">D1 (Diploma 1)</option>
+                                    <option value="D2">D2 (Diploma 2)</option>
+                                    <option value="D3">D3 (Diploma 3)</option>
+                                    <option value="S1">S1 (Sarjana)</option>
+                                    <option value="S2">S2 (Magister)</option>
+                                    <option value="S3">S3 (Doktor)</option>
+                                </select>
+                                <p id="errorEducation" class="error-message">Riwayat pendidikan wajib diisi!</p>
+
+                                <label for="job">Pekerjaan</label>
+                                <input type="text" th:field="*{pekerjaan}"
+                                       id="job" placeholder="Masukkan pekerjaan Anda">
+                                <p id="errorJob" class="error-message">Pekerjaan wajib diisi!</p>
+
+                                <label for="password">Kata Sandi</label>
+                                <input type="password" th:field="*{password}"
+                                       id="password" placeholder="Masukkan kata sandi">
+                                <p id="errorPassword" class="error-message">Kata sandi wajib diisi!</p>
+
+                                <button type="submit" class="btn-save">Simpan Perubahan</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+</body>
+
+<script>
+    let lastScrollTop = 0;
+    const navbar = document.querySelector('.navbar');
+
+    window.addEventListener('scroll', function () {
+        let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (currentScroll > lastScrollTop) {
+            navbar.classList.remove('navbar-visible');
+            navbar.classList.add('navbar-hidden');
+        } else {
+            navbar.classList.remove('navbar-hidden');
+            navbar.classList.add('navbar-visible');
+        }
+        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+    });
+
+    function validateForm() {
+        let isValid = true;
+
+        const fieldsToValidate = ['username', 'nama', 'nik', 'phoneNum', 'address', 'birthDate', 'education', 'job', 'password'];
+
+        fieldsToValidate.forEach((id) => {
+            const input = document.getElementById(id);
+            const error = document.getElementById(`error${id.charAt(0).toUpperCase() + id.slice(1)}`);
+
+            if (!input.value.trim()) {
+                error.style.display = 'block';
+                isValid = false;
+            } else {
+                error.style.display = 'none';
+            }
+
+            if (id === 'nik' && input.value.length !== 16) {
+                error.innerText = 'NIK harus terdiri dari 16 karakter!';
+                error.style.display = 'block';
+                isValid = false;
+            }
+
+            if (id === 'phoneNum') {
+                if (input.value.length < 10 || input.value.length > 15) {
+                    error.innerText = 'Nomor telepon harus antara 10 hingga 15 karakter!';
+                    error.style.display = 'block';
+                    isValid = false;
+                }
+            }
+        });
+        return isValid;
+    }
+
+    document.querySelector('form').addEventListener('submit', (e) => {
+        if (!validateForm()) {
+            e.preventDefault(); 
+        }
+    });
+
+</script>
+
+</html>

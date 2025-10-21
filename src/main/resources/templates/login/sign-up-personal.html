@@ -1,0 +1,243 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    <title>Save Account</title>
+
+    <style>
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        label {
+            margin-top: 15px;
+        }
+
+        select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            background-color: #fff;
+            color: #495057;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+
+        select:focus {
+            border-color: #209246;
+            outline: none;
+        }
+
+        select option {
+            padding: 0.75rem;
+            background-color: #fff;
+        }
+
+        select:invalid {
+            border-color: red;
+        }
+
+        .card.edit-card {
+            width: 75%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+            border-radius: 10px;
+            background-color: #fff;
+        }
+
+        .btn-save {
+            background-color: #209246;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 0.75rem;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .btn-save:hover {
+            background-color: #0c5926;
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .form-group input:focus {
+            border-color: #209246;
+            outline: none;
+        }
+
+        .table {
+            font-size: 0.9rem;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .table thead th {
+            background-color: #209246;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .table td,
+        .table th {
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        .btn-warning {
+            background-color: #209246;
+            border: none;
+            color: #212529;
+            font-weight: bold;
+            padding: 0.75rem;
+            border-radius: 5px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .btn-warning:hover {
+            background-color: #0c5926;
+            color: #fff;
+        }
+
+        .btn-info {
+            background-color: #209246;
+            border: none;
+            color: #fff;
+            padding: 0.75rem;
+            border-radius: 5px;
+        }
+
+        .btn-info:hover {
+            background-color: #0c5926;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border: none;
+            color: #fff;
+            padding: 0.75rem;
+            border-radius: 5px;
+        }
+
+        .btn-danger:hover {
+            background-color: #bd2130;
+        }
+
+        .container {
+            max-width: 1200px;
+            padding: 2rem;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            color: #343a40;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container my-5">
+
+    <h3>User Account</h3>
+    <hr>
+    <form th:action="@{/register/personal}" th:object="${accountId}" method="POST">
+        <div class="form-group">
+
+            <input type="hidden" th:field="*{account_id}" />
+
+            <label for="username">Nama Pengguna</label>
+            <input type="text" th:field="*{username}"
+                   id="username" placeholder="Masukkan nama pengguna">
+
+            <label for="nama">Nama Lengkap</label>
+            <input type="text" th:field="*{name}"
+                   id="nama" name="nama" placeholder="Masukkan Nama Lengkap">
+
+            <label for="nik">NIK</label>
+            <input type="text" th:field="*{nik}"
+                   id="nik" name="nik" placeholder="Masukkan NIK">
+
+            <label for="phoneNum">Nomor Telepon</label>
+            <input type="tel" th:field="*{telp_number}"
+                   id="phoneNum" placeholder="Masukkan nomor telepon Anda">
+
+            <label for="birthDate">Tanggal Lahir</label>
+            <input type="date" th:field="*{date}" id="birthDate">
+
+            <label for="education">Riwayat Pendidikan Terakhir</label>
+            <select id="education" th:field="*{pendidikan}">
+                <option value="" disabled selected>Pilih jenjang pendidikan</option>
+                <option value="SD">SD (Sekolah Dasar)</option>
+                <option value="SMP">SMP (Sekolah Menengah Pertama)</option>
+                <option value="SMA">SMA (Sekolah Menengah Atas)</option>
+                <option value="D1">D1 (Diploma 1)</option>
+                <option value="D2">D2 (Diploma 2)</option>
+                <option value="D3">D3 (Diploma 3)</option>
+                <option value="S1">S1 (Sarjana)</option>
+                <option value="S2">S2 (Magister)</option>
+                <option value="S3">S3 (Doktor)</option>
+            </select>
+
+            <label for="job">Pekerjaan</label>
+            <input type="text" th:field="*{pekerjaan}"
+                   id="job" placeholder="Masukkan pekerjaan Anda">
+
+            <label for="password">Kata Sandi</label>
+            <input type="password" th:field="*{password}"
+                   id="password" placeholder="Masukkan kata sandi">
+
+            <button type="submit" class="btn btn-info col-2" style="color: white; margin-top: 20px;">Save</button>
+    </form>
+    <hr>
+</div>
+
+</body>
+</html>

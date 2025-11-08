@@ -1,6 +1,6 @@
 # AdaKita - Online Loan Platform
 
-**Project Context:** University Course Project | Object Oriented Programming
+**Project Context:** University Course Project | Object Oriented Programming <br>
 **Version:** 1.0 (Spring Boot / MySQL / Thymeleaf)
 
 ---

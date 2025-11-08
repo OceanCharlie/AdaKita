@@ -9,5 +9,4 @@ class AdakitaApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }
